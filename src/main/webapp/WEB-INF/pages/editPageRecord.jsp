@@ -22,11 +22,11 @@
             $('#search').click(function () {
                 let numberPhone = $('#search').val();
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     url: '/add/getSearchResult',
                     data:  {numberPhone: numberPhone},
                     success: function (response) {
-                        console.log(response);
+                        console.log('person ' + response);
                         // $.each(response, function (key, value) {
                         //     console.log(key);
                         //     console.log(value);

@@ -8,6 +8,7 @@
 <body>
 
 <form:form action="${action}" method="POST" modelAttribute="editAnimal">
+
     <c:if test="${title =='EDIT'}">
         <form:input type="hidden" name="id" path="id"/>
     </c:if>

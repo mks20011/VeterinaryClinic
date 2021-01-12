@@ -26,14 +26,15 @@ public class Animal implements Serializable {
     private int age;
 
    // @Min(value = 0, message = "id клиента должно быть больше 0")
-    @Column(insertable = false, updatable = false)
+
+    @Column(name = "idPerson", updatable = false)
     private int idPerson;
 
    // @JoinColumn(name = "idPerson")
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "idPerson")
     private Person person;
-
+*/
     public Animal() {
     }
 
@@ -77,13 +78,13 @@ public class Animal implements Serializable {
         this.idPerson = idPerson;
     }
 
-    public Person getPerson() {
+  /*  public Person getPerson() {
         return person;
     }
 
     public void setPerson(Person person) {
         this.person = person;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -93,7 +94,7 @@ public class Animal implements Serializable {
                 ", nickname='" + nickname + '\'' +
                 ", age=" + age +
                 ", idPerson=" + idPerson +
-                ", person=" + person.getName() +
+    //            ", person=" + person +
                 '}';
     }
 }

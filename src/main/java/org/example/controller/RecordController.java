@@ -1,19 +1,19 @@
 package org.example.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.model.Animal;
 import org.example.model.Person;
 import org.example.model.Record;
 import org.example.service.PersonService;
-import org.example.service.PersonServiceImpl;
 import org.example.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -67,10 +67,13 @@ public class RecordController {
         return "redirect:/record";
     }
 
-    @PostMapping(value = "/add/getSearchResult")
-    public @ResponseBody
-    Person check(@RequestParam(value = "numberPhone") String numberPhone) {
-        return  personService.getByNumberPhone(numberPhone);
+    @GetMapping(value = "/add/getSearchResult")
+    @ResponseBody
+    public Person check(@RequestParam(value = "numberPhone") String numberPhone) throws JsonProcessingException {
+        Person person = personService.getByNumberPhone(numberPhone);
+
+        System.out.println("jsoon " + person.toString());
+        return person;
     }
 
 }

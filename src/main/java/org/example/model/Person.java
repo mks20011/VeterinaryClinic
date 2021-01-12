@@ -33,7 +33,7 @@ public class Person implements Serializable {
     @UniqueElements
     private String numberPhone;
 
-    @OneToMany (mappedBy="person", fetch=FetchType.EAGER)
+    @OneToMany (mappedBy="idPerson", fetch=FetchType.EAGER)
     private List<Animal> animalList;
 
     public List<Animal> getAnimalList() {

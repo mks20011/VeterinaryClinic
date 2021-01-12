@@ -35,7 +35,7 @@ public class AnimalController {
 
     @GetMapping("/")
     public String allAnimal(Model model) {
-        List<Animal> animal = animalService.allAnimal(); // лист с людьми
+        List<Animal> animal = animalService.allAnimal(); // лист с жиыотными
         model.addAttribute("animalList", animal); //добавляем объект
         return "animal";
     }
@@ -45,31 +45,33 @@ public class AnimalController {
         model.addAttribute("title", "EDIT");
         model.addAttribute("action", "/animal/edit");
         model.addAttribute("editAnimal", animalService.getById(id));
-
+        model.addAttribute("person", personService.getById(animalService.getById(id).getIdPerson()));
         return "/editPageAnimal";
     }
 
     @PostMapping("/edit")
     public String editAnimal(@Valid @ModelAttribute("editAnimal") Animal animal, BindingResult result,Model model) {
         //с помощью аннотации @ModelAttribute мы получаем этот атрибут и можем его изменить.
+        // int id = animal.getIdPerson();
+        // animal.setPerson(personService.getById(id));
         if (result.hasErrors()) {
             model.addAttribute("title", "EDIT");
             model.addAttribute("action", "/animal/edit");
             return "editPageAnimal";
         }
-        int id = animal.getIdPerson();
-        animal.setPerson(personService.getById(id));
+        //int id = animal.getIdPerson();
         animalService.edit(animal);
         return "redirect:/animal";
     }
 
     @GetMapping("/add/{id}")
-    public String addPageIdPerson(@ModelAttribute("editAnimal") Animal animal, Model model, @PathVariable int id) {
+    public String addPageIdAnimal(Animal animal, Model model, @PathVariable int id) {
         animalService.fillAnimal(animal,id);
+        model.addAttribute("editAnimal", animal);
         model.addAttribute("title", "ADD");
         model.addAttribute("action", "/animal/add");
         model.addAttribute("person", personService.getById(id));
-        model.addAttribute("idPerson",animal.getIdPerson());
+       // model.addAttribute("idPerson",personService.getById(id).getId());
         return "editPageAnimal";
     }
 
@@ -80,8 +82,8 @@ public class AnimalController {
             model.addAttribute("action", "/animal/add");
             return "editPageAnimal";
         }
-        int id = animal.getIdPerson();
-        animal.setPerson(personService.getById(id));
+        //int id = animal.getIdPerson();
+        //animal.setPerson(personService.getById(id));
         animalService.add(animal);
         return "redirect:/animal";
     }
@@ -91,8 +93,4 @@ public class AnimalController {
         animalService.delete(animalService.getById(id));
         return "redirect:/animal";
     }
-
-
-
-
 }

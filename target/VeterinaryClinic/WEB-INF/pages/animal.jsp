@@ -22,7 +22,7 @@
             <td>${animal.view}</td>
             <td>${animal.nickname}</td>
             <td>${animal.age}</td>
-            <td>${animal.person.name} ${animal.person.numberPhone}</td>
+            <td>${animal.idPerson}</td>
             <td>
                 <a href="/animal/edit/${animal.id}">edit</a>
                 <a href="/animal/delete/${animal.id}">delete</a>

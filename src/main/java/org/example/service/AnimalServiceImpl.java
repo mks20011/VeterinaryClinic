@@ -52,9 +52,10 @@ animalDao.add(animal);
     public Animal getById(int id) {
         return animalDao.getById(id);
     }
+
     @Override
     public void fillAnimal(Animal animal, int personId) {
-        animal.setPerson(personService.getById(personId));
+       // animal.setPerson(personService.getById(personId));
         animal.setIdPerson(personId);
     }
 }
