@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequestMapping("/record")
 public class RecordController {
 
     RecordService recordService;
@@ -33,25 +34,25 @@ public class RecordController {
         this.recordService = recordService;
     }
 
-    @RequestMapping(value = "/")
+    @GetMapping
     public String allRecord(Model model) {
         List<Record> recordList = recordService.allRecord();
         model.addAttribute("recordList", recordList);
         return "record";
     }
 
-    @GetMapping("/animal")
+   /* @GetMapping("/animal")
     public String animalPage() {
-        return "redirect:/animal/";
+        return "redirect:/animal";
     }
 
     @GetMapping("/person")
     public String personPage() {
-        return "redirect:/person/";
-    }
+        return "redirect:/person";
+    }*/
 
     @GetMapping("/add")
-    public String addRecord(@ModelAttribute("editRecord") Record record, Model model) {
+    public String addPage(@ModelAttribute("editRecord") Record record, Model model) {
 
         model.addAttribute("title", "ADD");
         model.addAttribute("action", "/record/add");
@@ -59,10 +60,11 @@ public class RecordController {
     }
 
     @PostMapping("/add")
-    public String addPerson(@Valid @ModelAttribute("editRecord") Record record, BindingResult result, Model model) {
+    public String addRecord(@Valid @ModelAttribute("editRecord") Record record, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "editPageRecord";
         }
+        record.setPerson(personService.getById(record.getIdPerson()));
         recordService.add(record);
         return "redirect:/record";
     }
@@ -70,10 +72,32 @@ public class RecordController {
     @GetMapping(value = "/add/getSearchResult")
     @ResponseBody
     public Person check(@RequestParam(value = "numberPhone") String numberPhone) throws JsonProcessingException {
-        Person person = personService.getByNumberPhone(numberPhone);
-
-        System.out.println("jsoon " + person.toString());
-        return person;
+        return personService.getByNumberPhone(numberPhone);
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRecord(@PathVariable("id") int id, Model model) {
+        recordService.delete(recordService.getById(id));
+        return "redirect:/record";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPage(Model model, @PathVariable int id) {
+        model.addAttribute("title","EDIT");
+        model.addAttribute("action", "/record/edit");
+        model.addAttribute("editRecord", recordService.getById(id));
+        return "/editPageRecord";
+    }
+
+    @PostMapping("/edit")
+    public String editPerson(@Valid @ModelAttribute("editRecord") Record record, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "editPageRecord";
+        }
+        recordService.edit(record);
+        return "redirect:/record";
+    }
+
+
 
 }

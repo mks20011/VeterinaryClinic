@@ -5,18 +5,15 @@
     <title>RECORD</title>
 </head>
 <body>
-<c:url value="/animal" var="animalPage"/>
-<a href="${animalPage}">List animal</a>
+<a href="${pageContext.request.contextPath}/animal">List animal</a>
 </br>
-<c:url value="/person" var="recordPage"/>
-<a href="${recordPage}">List person</a>
+<a href="${pageContext.request.contextPath}/person">List person</a>
 
 <table>
     <tr>
         <td>id</td>
         <td>data</td>
-        <td>name</td>
-        <td>number</td>
+        <td>person</td>
         <td>animal</td>
         <td>action</td>
     </tr>
@@ -24,9 +21,8 @@
         <tr>
             <td>${record.id}</td>
             <td>${record.data}</td>
-            <td>${record.person.name}</td>
-            <td>${record.person.numberPhone}</td>
-            <td>${record.animal.view}</td>
+            <td>${record.person.id}</td>
+            <td>${record.idAnimal}</td>
             <td>
                 <a href="/record/edit/${record.id}">edit</a>
                 <a href="/record/delete/${record.id}">delete</a>
@@ -35,7 +31,9 @@
     </c:forEach>
 </table>
 <h2>Add</h2>
-<c:url value="/add" var="add"/>
+<c:url value="/record/add" var="add"/>
 <a href="${add}">Add new record</a>
+<h2>Break</h2>
+<a href="${pageContext.request.contextPath}/">Break home</a>
 </body>
 </html>

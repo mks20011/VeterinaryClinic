@@ -25,7 +25,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String allPerson(Model model) {
         List<Person> person = personService.allPerson();
         model.addAttribute("personList", person);
@@ -52,9 +52,8 @@ public class PersonController {
 
     @GetMapping("/add")
     public String addPage(@ModelAttribute("editPerson") Person person,Model model) {
-
-        model.addAttribute("title","EDIT");
-        model.addAttribute("action", "/person/edit");
+        model.addAttribute("title","ADD");
+        model.addAttribute("action", "/person/add");
         return "editPagePerson";
     }
 

@@ -32,6 +32,6 @@
 </table>
 
 <h2>Break</h2>
-<a href="${pageContext.request.contextPath}/">Break home</a>
+<a href="${pageContext.request.contextPath}/record">Break record</a>
 </body>
 </html>

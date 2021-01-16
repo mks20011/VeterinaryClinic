@@ -29,8 +29,8 @@ public class Person implements Serializable {
     @Min(value = 0, message = "Возраст должен быть больше 0")
     private int age;
     @Column(name = "numberPhone")
+  //  @UniqueElements
     @Size(min = 5, max = 11, message = "Номер должен быть от 5 до 11 символов")
-    @UniqueElements
     private String numberPhone;
 
     @OneToMany (mappedBy="idPerson", fetch=FetchType.EAGER)

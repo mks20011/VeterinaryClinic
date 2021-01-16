@@ -1,6 +1,9 @@
 package org.example.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -11,6 +14,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "data")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date data;
     @Column(name = "numberPhone")
     private String numberPhone;

@@ -33,7 +33,7 @@ public class AnimalController {
         this.personService = personService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String allAnimal(Model model) {
         List<Animal> animal = animalService.allAnimal(); // лист с жиыотными
         model.addAttribute("animalList", animal); //добавляем объект
