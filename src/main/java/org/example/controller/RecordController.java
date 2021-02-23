@@ -41,16 +41,6 @@ public class RecordController {
         return "record";
     }
 
-   /* @GetMapping("/animal")
-    public String animalPage() {
-        return "redirect:/animal";
-    }
-
-    @GetMapping("/person")
-    public String personPage() {
-        return "redirect:/person";
-    }*/
-
     @GetMapping("/add")
     public String addPage(@ModelAttribute("editRecord") Record record, Model model) {
 

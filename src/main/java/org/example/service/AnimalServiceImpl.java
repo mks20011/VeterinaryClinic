@@ -14,15 +14,11 @@ public class AnimalServiceImpl implements AnimalService {
     private AnimalDao animalDao;
 
 
-    private PersonService personService;
     @Autowired
     public void setAnimalDao(AnimalDao animalDao) {
         this.animalDao = animalDao;
     }
-    @Autowired
-    public void setPersonService(PersonService personService) {
-        this.personService = personService;
-    }
+
     @Override
     @Transactional
     public List<Animal> allAnimal() {

@@ -16,19 +16,19 @@
     <form:input type="hidden" name="id" path="id"/>
 </c:if>
 
-    <form:label for="name" path="name"/>
+    <form:label for="name" path="name">Name</form:label>
     <form:input type="text" name="name" id="name" path="name"/>
     <form:errors path="name" cssClass="errors"/>
 
-    <form:label for="surName" path="surName"/>
+    <form:label for="surName" path="surName">SurName</form:label>
     <form:input type="text" name="surName" id="surName" path="surName"/>
     <form:errors path="surName" cssClass="errors"/>
 
-    <form:label for="age" path="age"/>
+    <form:label for="age" path="age">Age</form:label>
     <form:input type="text" name="age" id="age" path="age"/>
     <form:errors path="age" cssClass="errors"/>
 
-    <form:label for="numberPhone" path="numberPhone"/>
+    <form:label for="numberPhone" path="numberPhone">NumberPhone</form:label>
     <form:input type="text" name="numberPhone" id="numberPhone" path="numberPhone"/>
     <form:errors path="numberPhone" cssClass="errors"/>
 

@@ -24,9 +24,7 @@ public class Animal implements Serializable {
     @Column(name = "age")
     @Min(value = 0, message = "Возраст должен быть больше 0")
     private int age;
-
    // @Min(value = 0, message = "id клиента должно быть больше 0")
-
     @Column(name = "idPerson", updatable = false)
     private int idPerson;
 
