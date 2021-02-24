@@ -10,39 +10,7 @@
     <title>PRODUCT</title>
 
     <script>
-        let animalList = null;
-        // let select = $('#selectName');
-        $(document).ready(function() {
-            $('#research').click(function () {
-                let numberPhone = $('#numberPhone').val();
-                $('#select1').find('option').remove();
-                if (numberPhone) {
 
-                    $.ajax({
-                        type: 'GET',
-                        url: '/record/add/getSearchResult',
-                        data: {numberPhone: numberPhone},
-                        success: function (response) {
-                            $('#idPerson').val(response.id);
-                            $('#person').val(response.name + " " + response.surName + " " + response.age);
-                            animalList = response.animalList;
-
-                            animalList.forEach(function (element) {
-                                $('#select1').append('<option value="'
-                                    + element.id
-                                    + '">'
-                                    + element.view + " "
-                                    + element.nickname + " "
-                                    + "Возраст: " + element.age
-                                    + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    alert("Введите номер телефона")
-                }
-            });
-        });
     </script>
 
 </head>
