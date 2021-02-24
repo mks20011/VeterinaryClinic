@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping(value = "/registration")
     public String registration(@ModelAttribute("user") User user, BindingResult result) {
         //validator.validate(user, result);
-        if (result.hasErrors() || userService.findByLogin(user.getLogin())!=null)
+        if (result.hasErrors() || userService.findByLogin(user.getLogin()) != null)
             return "registration";
         userService.save(user);
         return "home";
@@ -40,8 +40,9 @@ public class UserController {
             model.addAttribute("message", "Logged successful");
         return "login";
     }
+
     @PostMapping(value = "/login")
-    public String login(@ModelAttribute("user") User user, BindingResult result) {
+    public String login(@Valid @ModelAttribute("user") User user, BindingResult result) {
         //validator.validate(user, result);
         if (result.hasErrors())
             return "login";
@@ -55,14 +56,16 @@ public class UserController {
         model.addAttribute("userList", userList);
         return "adminPanel";
     }
+
     @GetMapping("/adminPanel/add")
-    public String addUser(@ModelAttribute("editUser") User user,Model model) {
+    public String addUser(@ModelAttribute("editUser") User user, Model model) {
         model.addAttribute("title", "ADD");
         model.addAttribute("action", "/adminPanel/add");
         return "editAdminPanel";
     }
+
     @PostMapping("/adminPanel/add")
-    public String addUser(@ModelAttribute("editUser") User user,BindingResult result) {
+    public String addUser(@ModelAttribute("editUser") User user, BindingResult result) {
         if (result.hasErrors()) {
             return "editAdminPanel";
         }
@@ -71,14 +74,15 @@ public class UserController {
     }
 
     @GetMapping("/adminPanel/edit/{id}")
-    public String editUser(@PathVariable int id,Model model) {
+    public String editUser(@PathVariable int id, Model model) {
         model.addAttribute("title", "EDIT");
         model.addAttribute("action", "/adminPanel/edit");
         model.addAttribute("editUser", userService.findById(id));
         return "editAdminPanel";
     }
+
     @PostMapping("/adminPanel/edit")
-    public String editUser(@ModelAttribute("editUser") User user,BindingResult result) {
+    public String editUser(@ModelAttribute("editUser") User user, BindingResult result) {
         if (result.hasErrors()) {
             return "editAdminPanel";
         }

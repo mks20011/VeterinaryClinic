@@ -53,9 +53,10 @@ public class UserServiceImpl implements  UserService {
     }
 
     @Override
+    @Transactional
     public void add(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        userDao.add(user);
+        userDao.save(user);
     }
 
     @Override
@@ -67,6 +68,7 @@ public class UserServiceImpl implements  UserService {
     @Override
     @Transactional
     public void edit(User user) {
+        //user.setPassword(encoder.encode(user.getPassword()));
         userDao.edit(user);
     }
 }

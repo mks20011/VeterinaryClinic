@@ -27,10 +27,11 @@ public class WebSecurityConfig
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/animal/**","/person/**","/record/**","/adminPanel/**").hasAuthority("ROLE_ADMIN")
-              //  .antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/animal/**", "/person/**", "/record/**", "/adminPanel/**")
+                .hasAuthority("ROLE_ADMIN")
+                //  .antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .antMatchers("/**").permitAll()
-               .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error")

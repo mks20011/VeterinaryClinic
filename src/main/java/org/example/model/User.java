@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +28,28 @@ public class User implements Serializable {
     @Column(name = "role")
     @NotEmpty
     private String role;
+
+    @Column(name = "numberPhone")
+    private String numberPhone;
+
+    @OneToMany (mappedBy="idUser", fetch=FetchType.LAZY)
+    private List<Order> orderList;
+
+    /*public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }*/
+
+    public String getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
 
     @Transient
     private String confirmPassword;
@@ -89,7 +112,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,login, password, role);
+        return Objects.hash(id, login, password, role);
     }
 
 

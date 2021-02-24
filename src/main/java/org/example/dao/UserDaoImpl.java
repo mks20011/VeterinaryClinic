@@ -61,4 +61,6 @@ public class UserDaoImpl implements UserDao{
         Session session = sessionFactory.getCurrentSession();
         session.persist(user);
     }
+
+
 }
