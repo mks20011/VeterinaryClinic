@@ -29,27 +29,6 @@ public class User implements Serializable {
     @NotEmpty
     private String role;
 
-    @Column(name = "numberPhone")
-    private String numberPhone;
-
-    @OneToMany (mappedBy="idUser", fetch=FetchType.LAZY)
-    private List<Order> orderList;
-
-    /*public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }*/
-
-    public String getNumberPhone() {
-        return numberPhone;
-    }
-
-    public void setNumberPhone(String numberPhone) {
-        this.numberPhone = numberPhone;
-    }
 
     @Transient
     private String confirmPassword;

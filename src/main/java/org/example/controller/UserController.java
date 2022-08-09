@@ -1,6 +1,8 @@
 package org.example.controller;
 
+import org.example.model.Order;
 import org.example.model.User;
+import org.example.service.OrderService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private OrderService orderService;
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("user", new User());
@@ -26,7 +35,7 @@ public class UserController {
     @PostMapping(value = "/registration")
     public String registration(@ModelAttribute("user") User user, BindingResult result) {
         //validator.validate(user, result);
-        if (result.hasErrors() || userService.findByLogin(user.getLogin()) != null)
+        if (result.hasErrors())
             return "registration";
         userService.save(user);
         return "home";

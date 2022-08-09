@@ -1,7 +1,12 @@
 package org.example.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.example.model.Order;
 import org.example.model.Product;
+import org.example.model.ProductOrder;
+import org.example.service.OrderService;
+import org.example.service.ProductOrderService;
 import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,18 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
+    private OrderService orderService;
+    private ProductOrderService productOrderService;
+
+    @Autowired
+    public void setProductOrderService(ProductOrderService productOrderService) {
+        this.productOrderService = productOrderService;
+    }
+
+    @Autowired
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -26,7 +43,7 @@ public class ProductController {
     @GetMapping
     public String allProduct(Model model) {
         List<Product> products = productService.allProduct();
-        model.addAttribute("productList",products);
+        model.addAttribute("productList", products);
         return "product";
     }
 
@@ -48,7 +65,7 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String editProduct(Model model, @PathVariable int id) {
-        model.addAttribute("title","EDIT");
+        model.addAttribute("title", "EDIT");
         model.addAttribute("action", "/product/edit");
         model.addAttribute("editProduct", productService.getById(id));
         return "/editPageProduct";
@@ -69,4 +86,23 @@ public class ProductController {
         return "redirect:/product";
     }
 
+    @GetMapping(value = "/add/getSearchProduct")
+    @ResponseBody
+    public String check(@RequestParam(value = "id") int id) throws JsonProcessingException {
+
+        Order order = new Order();
+        order.setIdUser(8);
+        order.setActive(true);
+        orderService.add(order);
+
+        ProductOrder productOrder = new ProductOrder();
+        productOrder.setIdOrder(order.getId());
+        productOrder.setIdProduct(id);
+        productOrder.setQuantity(1);
+        productOrder.setPrice( productService.getById(id).getPrice());
+        productOrder.setAmount( productService.getById(id).getPrice());
+        productOrderService.add(productOrder);
+
+        return "Товар успешно добавлен";
+    }
 }

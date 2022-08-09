@@ -12,7 +12,6 @@ public class ProductOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="idOrder",updatable = false)
-    @NotNull
     private int idOrder;
     @Column(name="idProduct")
     @NotNull

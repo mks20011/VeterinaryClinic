@@ -10,45 +10,65 @@
     <title>PRODUCT</title>
 
     <script>
-
+        $(document).ready(function () {
+            $(document.querySelectorAll("button")).click(function () {
+                let id = this.id;
+                let quantity = $('#quantity' + id).val();
+                if (quantity) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/product/add/getSearchProduct',
+                        data: {id: id},
+                        success: function (response) {
+                            alert(response);
+                        }
+                    });
+                } else {
+                    alert("введите количество");
+                }
+            });
+        });
     </script>
 
 </head>
 <body>
-    <h2>Product</h2>
-    <table>
-        <tr>
+<h2>Product</h2>
+<table>
+    <tr>
+        <security:authorize access="hasAuthority('ROLE_ADMIN')">
             <th>id</th>
-            <th>name</th>
-            <th>quantity</th>
-            <th>price</th>
-        </tr>
-        <c:forEach var="prod" items="${productList}">
-            <tr>
+        </security:authorize>
+        <th>name</th>
+        <th>quantity in stock</th>
+        <th>price</th>
+    </tr>
+    <c:forEach var="prod" items="${productList}">
+        <tr>
+            <security:authorize access="hasAuthority('ROLE_ADMIN')">
                 <td>${prod.id}</td>
-                <td>${prod.name}</td>
-                <td>${prod.quantity}</td>
-                <td>${prod.price}</td>
-                <td>
-                    <security:authorize access="hasAuthority('ROLE_ADMIN')">
-                        <a href="/product/edit/${prod.id}">edit</a>
-                        <a href="/product/delete/${prod.id}">delete</a>
-                    </security:authorize>
-                    <input  href="${pageContext.request.contextPath}/product/Add/product_order/${prod.id}" id="add" type="button" value="Добавить товар в корзину ">
-                    <p>укажите количество твара</p>
-                    <input type="hidden" id="quantity"/>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
+            </security:authorize>
+            <td>${prod.name}</td>
+            <td>${prod.quantity}</td>
+            <td>${prod.price}</td>
+            <td>
+                <security:authorize access="hasAuthority('ROLE_ADMIN')">
+                    <a href="/product/edit/${prod.id}">edit</a>
+                    <a href="/product/delete/${prod.id}">delete</a>
+                </security:authorize>
+                <button id="${prod.id}" value="add to cart"></button>
+
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 
 
-    <security:authorize access="hasAuthority('ROLE_ADMIN')">
-        <c:url value="/product/add" var="add"/>
-        <h2>Add</h2>
-        <a href="${add}">Add new product</a>
-    </security:authorize>
-    <h2>Break</h2>
-    <a href="${pageContext.request.contextPath}/">Break home</a>
+<security:authorize access="hasAuthority('ROLE_ADMIN')">
+    <c:url value="/product/add" var="add"/>
+    <h2>Add</h2>
+    <a href="${add}">Add new product</a>
+</security:authorize>
+<h2>Break</h2>
+<a href="${pageContext.request.contextPath}/">Break home</a>
 </body>
 </html>

@@ -38,11 +38,6 @@
         <form:errors path="confirmPassword" cssClass="errors"/>
     </div>
 
-    <form:input type="numberPhone" id="numberPhone" path="numberPhone" placeholder="numberPhone" required="required"/>
-    <form:label path="numberPhone" for="numberPhone">Number Phone</form:label>
-    <div>
-        <form:errors path="numberPhone" cssClass="errors"/>
-    </div>
 
     </br>
     <button id="button" type="submit">Registration</button>

@@ -22,6 +22,16 @@ public class Order implements Serializable {
     private double amount;
     @Column(name = "numberPhone")
     private String numberPhone;
+    @Column(name="active")
+    private Boolean active;
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     @OneToMany (mappedBy="idOrder", fetch=FetchType.EAGER)
     private List<ProductOrder> productOrderList;
